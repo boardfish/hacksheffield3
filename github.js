@@ -10,6 +10,7 @@ var request = client({
     repositories(first: 100) {
       edges {
         node {
+		  name
           ref(qualifiedName: "master") {
       target {
         ... on Commit {
@@ -21,7 +22,7 @@ var request = client({
             edges {
               node {
                 messageHeadline
-                url
+                commitUrl
                 message
                 author {
                   name
@@ -40,12 +41,30 @@ var request = client({
 }`
 }, function (err, res) {
   if (err) {
+	console.log(GITHUB_TOKEN)
     console.log(err)
   } else {
-	console.log(res)
-	console.log("--------")
-	res.data.viewer.repositories.edges.forEach(function(node) {
-		console.log(node.node.ref.target)
+ 	var repositories = res.data.viewer.repositories
+	var commits = []
+	repositories.edges.forEach(function(node) {
+		var repo = node.node
+		console.log("--------")
+		console.log(repo.name)
+		console.log("--------")
+		if (!repo.ref) {
+			//no history
+		} else {
+			var history = repo.ref.target.history.edges
+			history.forEach(function(commit) {
+				var commitData = {}
+				commitData.source = commit.node.author.name + " in " + repo.name
+				commitData.message = commit.node.messageHeadline
+				commitData.url = commit.node.commitUrl
+				commitData.date = commit.node.author.date
+				commits.push(commitData)
+			})
+		}
+		console.log(commits)
 	})
   }
 });
