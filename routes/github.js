@@ -11,7 +11,6 @@ if (!GITHUB_TOKEN) throw new Error("Supply GitHub token");
 
 github_commits = function (callback) {
     var client = require('github-graphql-client');
-
     var request = client({
       token: GITHUB_TOKEN,
       query: `{
@@ -24,7 +23,7 @@ github_commits = function (callback) {
           target {
             ... on Commit {
               id
-              history(first: 5) {
+              history(first: 5 since:\"`+previousDateTime.toISOString()+`\") {
                 pageInfo {
                   hasNextPage
                 }
@@ -47,19 +46,17 @@ github_commits = function (callback) {
           }
         }
       }
-    }`
+  }`
     }, function (err, res) {
       if (err) {
     	console.log(GITHUB_TOKEN)
         console.log(err)
       } else {
+        previousDateTime = new Date();
      	var repositories = res.data.viewer.repositories
     	var commits = []
     	repositories.edges.forEach(function(node) {
     		var repo = node.node
-    		console.log("--------")
-    		console.log(repo.name)
-    		console.log("--------")
     		if (!repo.ref) {
     			//no history
     		} else {
@@ -73,7 +70,6 @@ github_commits = function (callback) {
     				commits.push(commitData)
     			})
     		}
-    		console.log(commits)
     	})
       }
       return callback(commits);
