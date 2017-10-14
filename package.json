@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/boardfish/hacksheffield3/issues"
   },
-  "homepage": "https://github.com/boardfish/hacksheffield3#readme"
+  "homepage": "https://github.com/boardfish/hacksheffield3#readme",
+  "dependencies": {
+    "pug": "^2.0.0-rc.4"
+  }
 }
