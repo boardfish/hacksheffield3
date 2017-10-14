@@ -1,13 +1,17 @@
 var http = require('http');
 var gh = require('./github');
-gh.github_commits(github_callback);
 var server = http.createServer(function(req, res) {
   res.writeHead(200);
   res.end('Hello Http');
 
 });
 
-function github_callback(data) {
-    console.log(data);
-}
+var express = require('express');
+var app = express();
+var server = require('http').Server(app);
+
+app.get('/github', function (req, res) { 
+	/
+	gh.github_commits(res.send.bind(res));
+});
 server.listen(8080);
