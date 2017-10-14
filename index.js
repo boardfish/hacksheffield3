@@ -11,7 +11,6 @@ var app = express();
 var server = require('http').Server(app);
 
 app.get('/github', function (req, res) { 
-	/
 	gh.github_commits(res.send.bind(res));
 });
 server.listen(8080);
