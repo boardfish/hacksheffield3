@@ -33,7 +33,6 @@ function addCardToFeed(content) {
 		)
 	)
 }
-addCardToFeed("test", "pencil-square-o", "test", "test", "test")
 
 setInterval(function() {
 	$.ajax({
@@ -41,7 +40,9 @@ setInterval(function() {
 		dataType: 'json',
 		type: 'GET'
 	}).done(function(data) {
-		console.log(data);
+		data.reverse().forEach(function(event) {
+			addCardToFeed(event)
+		})
 	}).fail(function(data) {
 		console.log("FAIL");
 		console.log(data);

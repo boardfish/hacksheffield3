@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 if (!GITHUB_TOKEN) throw new Error("Supply GitHub token");
 var previousDateTime = new Date();
-previousDateTime.setFullYear(1970);
+previousDateTime.setDate(previousDateTime.getDate() - 2);
 
 github_commits = function (callback) {
     var client = require('github-graphql-client');
@@ -25,7 +25,7 @@ github_commits = function (callback) {
           target {
             ... on Commit {
               id
-              history(first: 5 since:\"`+previousDateTime.toISOString()+`\") {
+              history(first: 100 since:\"`+previousDateTime.toISOString()+`\") {
                 pageInfo {
                   hasNextPage
                 }
@@ -67,8 +67,9 @@ github_commits = function (callback) {
     				var commitData = {}
     				commitData.source = commit.node.author.name + " in " + repo.name
     				commitData.message = commit.node.messageHeadline
-    				commitData.url = commit.node.commitUrl
-    				commitData.date = commit.node.author.date
+    				commitData.link = commit.node.commitUrl
+    				commitData.time = commit.node.author.date
+					commitData.icon = "github"
     				commits.push(commitData)
     			})
     		}
