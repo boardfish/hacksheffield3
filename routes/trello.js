@@ -2,12 +2,11 @@ var express = require('express');
 var router = express.Router();
 
 /* GET home page. */
-var responseData = [];
 router.get('/', function(req, res, next) {
   trello_actions(function(data, send) {
-	  	responseData.push(data);
 	  	if (send) {
-			res.send(responseData);
+			res.send(data);
+			responseData = [];
 		}
   });
 });
