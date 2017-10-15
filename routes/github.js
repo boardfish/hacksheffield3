@@ -8,6 +8,8 @@ router.get('/', function(req, res, next) {
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 if (!GITHUB_TOKEN) throw new Error("Supply GitHub token");
+var previousDateTime = new Date();
+previousDateTime.setFullYear(1970);
 
 github_commits = function (callback) {
     var client = require('github-graphql-client');

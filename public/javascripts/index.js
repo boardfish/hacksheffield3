@@ -1,8 +1,7 @@
-console.log("Loaded!")
-function addCardToFeed(source, icon, message, link, time) {
+function addCardToFeed(content) {
 	$("ul.list-group.list-group-flush")
 	.prepend(
-		$("<a>", {href: link})
+		$("<a>", {href: content.link})
 		.append(
 			$("<li>", {class: "list-group-item"})
 			.append(
@@ -10,23 +9,23 @@ function addCardToFeed(source, icon, message, link, time) {
 				.append(
 					$("<div>", {class: "col-2"})
 					.append(
-						$("<i>", {class: "fa fa-4x fa-"+icon})
+						$("<i>", {class: "fa fa-4x fa-"+content.icon})
 					),
 					$("<div>", {class: "col-10"})
 					.append(
 						$("<p>")
 						.append(
 							$("<b>")
-							.text(source)
+							.text(content.source)
 						)
 						.append(
 							$("<p>")
-							.text(message)
+							.text(content.message)
 						)
 						.append($("<br>"))
 						.append(
 							$("<small>", {class: "text-muted"})
-							.text(time)
+							.text(content.time)
 						)
 					)
 				)
@@ -36,15 +35,15 @@ function addCardToFeed(source, icon, message, link, time) {
 }
 addCardToFeed("test", "pencil-square-o", "test", "test", "test")
 
-// setInterval(function() {
-// 	$.ajax({
-// 		url: '/github',
-// 		dataType: 'json',
-// 		type: 'GET'
-// 	}).done(function(data) {
-// 		console.log(data);
-// 	}).fail(function(data) {
-// 		console.log("FAIL");
-// 		console.log(data);
-// 	})
-// }, 1500)
+setInterval(function() {
+	$.ajax({
+		url: '/github',
+		dataType: 'json',
+		type: 'GET'
+	}).done(function(data) {
+		console.log(data);
+	}).fail(function(data) {
+		console.log("FAIL");
+		console.log(data);
+	})
+}, 1500)
