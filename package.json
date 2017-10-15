@@ -1,23 +1,17 @@
 {
   "name": "hacksheffield3",
-  "version": "1.0.0",
-  "description": "Live updates from many sites",
-  "main": "index.js",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/boardfish/hacksheffield3.git"
-  },
-  "author": "Simon Fish, Jack Hartley, Esther Barlow-Smith, Shamis Giaquinto",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/boardfish/hacksheffield3/issues"
-  },
-  "homepage": "https://github.com/boardfish/hacksheffield3#readme",
   "dependencies": {
-    "github-graphql-client": "^1.0.0",
-    "pug": "^2.0.0-rc.4"
+    "body-parser": "~1.18.2",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.15.5",
+    "morgan": "~1.9.0",
+    "pug": "2.0.0-beta11",
+    "serve-favicon": "~2.4.5"
   }
 }
