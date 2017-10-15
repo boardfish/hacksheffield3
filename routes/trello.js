@@ -2,7 +2,9 @@ var express = require('express');
 var router = express.Router();
 
 /* GET home page. */
-var previousDateTime = new Date().setFullYear(1970);
+var previousDateTime = new Date();
+previousDateTime.setDate(previousDateTime.getDate() - 2);
+
 router.get('/', function(req, res, next) {
 	trello_actions(function(data, send) {
 		if (send) {
@@ -45,8 +47,9 @@ trello_actions = function(callback) {
 						eventData = {
 							'source': source,
 							'message': message,
-							'url': url,
-							'date': date
+							'link': url,
+							'time': date,
+                            'icon': 'trello',
 						};
 						events.push(eventData);
 					}

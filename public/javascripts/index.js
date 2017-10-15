@@ -54,7 +54,9 @@ setInterval(function() {
 		dataType: 'json',
 		type: 'GET'
 	}).done(function(data) {
-		console.log(data);
+		data.reverse().forEach(function(event) {
+			addCardToFeed(event)
+		})
 	}).fail(function(data) {
 		console.log("FAIL");
 		console.log(data);
