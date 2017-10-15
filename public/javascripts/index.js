@@ -47,3 +47,15 @@ setInterval(function() {
 		console.log(data);
 	})
 }, 1500)
+setInterval(function() {
+	$.ajax({
+		url: '/trello',
+		dataType: 'json',
+		type: 'GET'
+	}).done(function(data) {
+		console.log(data);
+	}).fail(function(data) {
+		console.log("FAIL");
+		console.log(data);
+	})
+}, 1500)

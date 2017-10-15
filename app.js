@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var github = require('./routes/github');
+var trello = require('./routes/trello');
 
 var app = express();
 
@@ -24,6 +25,7 @@ app.use("/public", express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/github', github);
+app.use('/trello', trello);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
